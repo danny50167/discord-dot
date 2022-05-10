@@ -508,21 +508,6 @@ client.on("message", (msg) => {
     msg.channel.send(exampleEmbed);
   }
 
-  if (msg.content === "도트 가위바위보") {
-    //기본적인 메세지 및 답장 코드.멘션을 하여 답장한다.
-    if (!user.id) {
-      const exampleEmbed = new Discord.MessageEmbed()
-        .setColor(`#8f8f8f`)
-        .setTitle(`등록되지 않은 유저!`)
-        .setDescription(
-          `**도트 돗줘**를 입력해서 등록하고, 서비스를 이용해봐!`
-        );
-      msg.channel.send(exampleEmbed);
-    } else {
-      msg.reply("가위, 바위, 보 중에 하나를 내줘!");
-    }
-  }
-
   if (msg.content.includes("도트 제비뽑기")) {
     //제비뽑기 기능이다.
     let elements = msg.content.replace("도트 제비뽑기 ", "");
@@ -749,9 +734,9 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
   }
 
   if (
-    msg.content === "가위" ||
-    msg.content === "바위" ||
-    msg.content === "보"
+    msg.content === "도트 가위" ||
+    msg.content === "도트 바위" ||
+    msg.content === "도트 보"
   ) {
     //가위바위보 코드이다.
     if (!user.id) {
@@ -764,7 +749,7 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
       msg.channel.send(exampleEmbed);
     } else {
       const list = { 가위: 1, 바위: 2, 보: 3 };
-      const human = list[msg.content];
+      const human = list[msg.content.split(" ")[1]];
       const bot = getRandomInt(3) + 1; // 1 || 2 || 3
 
       var keys = Object.keys(list);
