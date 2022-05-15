@@ -27,9 +27,37 @@ const calculateDegree = (num) => {
 const getKeys = (jsonObj) => {
   return Object.keys(jsonObj);
 };
+const drawGraph = (stockName,db) => {
+  const JSDOM = require("jsdom").JSDOM;
+  const jsdom = new JSDOM("<body><div id='container'></div></body>", {runScripts: "dangerously"});
+  const window = jsdom.window;
+
+  const anychart = require("anychart")(window)
+  const anychartExport = require("anychart-nodejs")(anychart);
+
+  const data = db
+  const chart = anychart.line();
+  const series = chart.line(data);
+  chart.container("container");
+  chart.draw();
+  
+  const fileName = `${stockName}.jpg`
+
+  anychartExport.exportTo(chart, "jpg").then((img) => {
+    fs.writeFile(fileName, image, (err) => {
+      if (err) {
+        console.log(err);
+      }else {
+        console.log("graph img saved!");
+      }
+    })
+  }, (generationErr) => {
+    console.log(generationErr);
+  })
+}
 
 client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log("HI!");
 });
 
 client.on("message", (msg) => {
@@ -67,10 +95,10 @@ client.on("message", (msg) => {
   const today = new Date();
   const date = "" + today.getFullYear() + today.getMonth() + today.getDate();
 
-  const wrongUseAlert = (title, content) => {
+  const wrongUseAlert = (content) => {
     const exampleEmbed = new Discord.MessageEmbed()
       .setColor(`#8f8f8f`)
-      .setTitle(title)
+      .setTitle("잘못된 사용법!")
       .setDescription(content);
     msg.channel.send(exampleEmbed);
   };
@@ -150,9 +178,15 @@ client.on("message", (msg) => {
     메타: "FB",
   };
 
+  const stocks_arr = ["애플", "구글", "테슬라", "로블록스", "메타"];
+
   if (msg.content.substring(0, 5) == "도트 주가") {
     const stockName = msg.content.split(" ")[2];
-    if (!stocks[stockName]) {
+    if (!stockName) {
+      wrongUseAlert(
+        `올바른 사용법은 **도트 주가 <회사 이름>**이야!\n회사는 **애플, 구글, 테슬라, 로블록스, 메타**중에서 골라줘!`
+      );
+    } else if (!stocks[stockName]) {
       wrongUseAlert(
         `입력한 ${stockName}은 돗이 지원하지 않는 주식이야!\n**애플, 구글, 테슬라, 로블록스, 메타**중에서 골라줘!`
       );
