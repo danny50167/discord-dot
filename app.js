@@ -210,7 +210,7 @@ client.on("message", (msg) => {
     const num = Number(msg.content.split(" ")[3]);
     if (!stocks[stockName]) {
       wrongUseAlert(
-        `입력한 ${stockName}은 돗이 지원하지 않는 주식이야!\n**애플, 구글, 테슬라, 로블록스, 메타**중에서 골라줘!`
+        `입력한 ${stockName}은 돗이 지원하지 않는 주식이야!`
       );
     } else {
       const apiLink = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stocks[stockName]}&interval=1min&apikey=88J02IFT5LJAUZP6`;
@@ -347,7 +347,7 @@ client.on("message", (msg) => {
           .setColor(`#8f8f8f`)
           .setTitle("주식 판매")
           .setDescription(
-            `AAPL의 주식을 한 주식 당 ${user.stocks[0]}돗으로 판매했어!`
+            `${stockName}의 주식을 한 주식 당 ${user.stocks[0]}돗으로 판매했어!`
           )
           .addFields({
             name: "주식계좌:",
@@ -461,20 +461,19 @@ client.on("message", (msg) => {
       .setTitle("커맨드")
       .setColor(`#8f8f8f`)
       .addFields(
-        {
-          name: `**도트 돗줘**`,
-          value: `하루에 한번 20돗씩 받아봐! 처음 오셨다면 30돗이야!`,
-        },
-        { name: `**도트 잔액확인 | 잔액**`, value: "잔액을 확인해봐!" },
-        { name: `**도트 가위바위보**`, value: `간단한 가위바위보를 즐겨봐!` },
-        { name: `**도트 운세**`, value: `오늘의 운세를 확인해봐!` },
-        { name: `**도트 과일게임**`, value: `과일이 들어간 세칸을` },
-        { name: `**도트 리더보드**`, value: `서버의 리더보드를 확인해봐!` },
-        {
-          name: `**도트 주식**`,
-          value: `**도트 주식사용법**를 입력해서 사용법을 알아봐!`,
-        }
-      );
+        {name: `**도트 ㅎㅇ**`, value: `동방예의지국인 대한민국에서 인사는 기본이겠지?`},
+        {name: `**도트 돗줘**`, value: `하루에 한번 20돗씩 받아봐! 처음 오셨다면 30돗이야!`},
+        {name: `**도트 잔액확인 | 잔액**`, value: "잔액을 확인해봐!"},
+        {name: `**도트 가위바위보**`, value: `간단한 가위바위보를 즐겨봐!`},
+        {name: `**도트 운세**`, value: `오늘의 운세를 확인해봐!`},
+        {name: `**도트 과일게임**`, value: `과일이 들어간 세칸이 모두 같으면 40돗!`},
+        {name: `**도트 리더보드**`, value: `서버의 리더보드를 확인해봐!`},
+        {name: `**도트 동전**`, value: `앞면이 나올까? 뒷면이 나올까?`},
+        {name: `**도트 투표**`, value: `민주주의 국가 대한민국에서 가장 필요한 투표!`},
+        {name: `**도트 저뭐먹**`, value: `저녁을 뭐 먹을지 고민될때 사용해봐!`},
+        {name: `**도트 제비뽑기 <항목1> <항목2>...**`, value: `결정이 힘들어질때 사용해봐!`},
+        {name: `**도트 주식사용법**`, value: `주식 사용법을 자세하게 알아봐!`}
+      )
     msg.channel.send(embed);
   }
 
@@ -483,10 +482,14 @@ client.on("message", (msg) => {
       .setTitle("**주식 사용법**")
       .setColor(`#8f8f8f`)
       .addFields(
-        {name: `**도트 주식구매 <회사이름> <주>**`, value: `도트에서 주식을 구매해봐!`}
-        // {name: ``}
+        {name: "회사 종류", value: `애플, 구글, 테슬라, 로블록스, 메타`},
+        {name: `**도트 주가 <회사이름>**`, value: `구매했던 주식의 주가를 확인해봐!`},
+        {name: `**도트 주식구매 <회사이름> <주>**`, value: `도트에서 주식을 구매해봐!`},
+        {name: `**도트 주식판매 <회사이름> <주>**`, value: `구매했던 주식을 판매해봐!`}
+
       )
-    msg.channel.send(embed);
+      .setFooter(`*주식시장은 주말에 열리지 않음*`)
+    msg.channel.send(embed); 
   }
 
   if (msg.content == "도트 리더보드") {
