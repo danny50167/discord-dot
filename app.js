@@ -478,6 +478,17 @@ client.on("message", (msg) => {
     msg.channel.send(embed);
   }
 
+  if (msg.content === "도트 주식사용법") {
+    const embed = new Discord.MessageEmbed()
+      .setTitle("**주식 사용법**")
+      .setColor(`#8f8f8f`)
+      .addFields(
+        {name: `**도트 주식구매 <회사이름> <주>**`, value: `도트에서 주식을 구매해봐!`}
+        // {name: ``}
+      )
+    msg.channel.send(embed);
+  }
+
   if (msg.content == "도트 리더보드") {
     // get all ids from db
     const dbFolder = `./db/${msg.guild.id}/`;
@@ -706,7 +717,6 @@ client.on("message", (msg) => {
   if (msg.content === "도트 관리자") {
     // 임베드를 사용하여 메세지를 보내는기능.보기 깔끔한것이 장점.
     const embed = new Discord.MessageEmbed()
-      .setAuthor("도트봇 관리자") // 관리자들 목록
       .setColor(`#8f8f8f`)
       .setTitle("이 사람들은 나를 만든 사람들이야!")
       .addField("[Developer]", "이아늬")
