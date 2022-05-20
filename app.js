@@ -184,11 +184,11 @@ client.on("message", (msg) => {
     const stockName = msg.content.split(" ")[2];
     if (!stockName) {
       wrongUseAlert(
-        `올바른 사용법은 **도트 주가 <회사 이름>**이야!\n회사는 **애플, 구글, 테슬라, 로블록스, 메타**중에서 골라줘!`
+        `올바른 사용법은 **도트 주가 <회사 이름>**이야!\n자세한 정보는 **도트 주식사용법**에서 확인해봐!`
       );
     } else if (!stocks[stockName]) {
       wrongUseAlert(
-        `입력한 ${stockName}은 돗이 지원하지 않는 주식이야!\n**애플, 구글, 테슬라, 로블록스, 메타**중에서 골라줘!`
+        `입력한 ${stockName}은 돗이 지원하지 않는 주식이야!\n자세한 정보는 **도트 주식사용법**에서 확인해봐!`
       );
     } else {
       const apiLink = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stocks[stockName]}&interval=1min&apikey=88J02IFT5LJAUZP6`;
@@ -210,7 +210,7 @@ client.on("message", (msg) => {
     const num = Number(msg.content.split(" ")[3]);
     if (!stocks[stockName]) {
       wrongUseAlert(
-        `입력한 ${stockName}은 돗이 지원하지 않는 주식이야!`
+        `입력한 ${stockName}은 돗이 지원하지 않는 주식이야!\n자세한 정보는 **도트 주식사용법**에서 확인해봐!`
       );
     } else {
       const apiLink = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stocks[stockName]}&interval=1min&apikey=88J02IFT5LJAUZP6`;
@@ -316,7 +316,7 @@ client.on("message", (msg) => {
             msg.channel.send(embed);
           } else {
             msg.reply(
-              `애플의 주가는 ${price}돗 이지만 너의 잔액은 ${user.money}돗이야. 돈을 더 모아서 와!`
+              `${stockName}의 주가는 ${price}돗 이지만 너의 잔액은 ${user.money}돗이야. 돈을 더 모아서 와!`
             );
           }
         }
