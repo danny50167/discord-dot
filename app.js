@@ -148,8 +148,7 @@ client.on("message", (msg) => {
             .setColor(`#8f8f8f`)
             .setTitle(`적립완료!`)
             .setDescription(
-              `${howMuch}돗 적립완료! \n${name}님의 현재 잔액은 
-  ${user.money + howMuch}이야!`
+              `${howMuch}돗 적립완료! \n${name}님의 현재 잔액은 ${user.money + howMuch}이야!`
             );
           msg.channel.send(exampleEmbed);
           saveUser = {
@@ -205,7 +204,11 @@ client.on("message", (msg) => {
         const objKey = Object.keys(obj)[1];
         const date = Object.keys(obj[Object.keys(obj)[1]])[0];
         const price = obj[objKey][date]["4. close"];
-        msg.reply(`오늘의 ${stockName} 주가: ${price}돗!`);
+        const exampleEmbed = new Discord.MessageEmbed()
+          .setColor(`#8f8f8f`)
+          .setTitle(`${stockName}의 주가`)
+          .setDescription(`오늘의 ${stockName} 주가: ${price}돗!`);
+        msg.channel.send(exampleEmbed);
       });
     }
   }
@@ -320,9 +323,11 @@ client.on("message", (msg) => {
               );
             msg.channel.send(embed);
           } else {
-            msg.reply(
-              `${stockName}의 주가는 ${price}돗 이지만 너의 잔액은 ${user.money}돗이야. 돈을 더 모아서 와!`
-            );
+            const embed = new Discord.MessageEmbed()
+              .setColor(`#8f8f8f`)
+              .setTitle(`잔액 부족`)
+              .setDescription(`${stockName}의 주가는 ${price}돗 이지만 너의 잔액은 ${user.money}돗이야. 돈을 더 모아서 와!`)
+            msg.channel.send(embed);
           }
         }
       });
