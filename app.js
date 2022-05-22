@@ -348,7 +348,7 @@ client.on("message", (msg) => {
     } else if (!num) {
       wrongUseAlert("잘못된 사용법!", "");
     } else if (num > user.stocks[1] || !user.stocks[1]) {
-      msg.reply("남은 주식이 없어서 판매할 수가 없어!");
+      wrongUseAlert("남은 주식이 없어서 팔지 못해!")
     } else {
       console.log(num);
       if (num > 0) {
@@ -453,7 +453,7 @@ client.on("message", (msg) => {
           }
         )
         .setTimestamp();
-      msg.reply(embed);
+      msg.channel.send(embed);
     } else if (!user.id) {
       const embed = new Discord.MessageEmbed()
         .setColor(`#8f8f8f`)
@@ -461,7 +461,7 @@ client.on("message", (msg) => {
         .setDescription(
           `**도트 돗줘**를 입력해서 등록하고, 서비스를 이용해봐!`
         );
-      msg.reply(embed);
+      msg.channel.send(embed);
     }
   }
 
@@ -585,7 +585,6 @@ client.on("message", (msg) => {
   if (msg.content == "도트 ㅎㅇ") {
     // 인사를 해주는 기능이다.
     // const msgs = ["안녕!", "ㅎㅇ!", "안녕하시오리까"];
-    // msg.reply(msgs[getRandomInt(3)])
     const exampleEmbed = new Discord.MessageEmbed()
       .setColor(`#8f8f8f`)
       .setDescription(`안녕!`);
@@ -747,7 +746,6 @@ client.on("message", (msg) => {
           return console.log(err);
         }
         meal = body.meals[0].strMeal;
-        // msg.reply(`오늘 당신이 쳐(?)먹을 저녁은 ${meal}입니다!`)
 
         const embed = new Discord.MessageEmbed()
           .setColor(`#8f8f8f`)
@@ -790,7 +788,7 @@ client.on("message", (msg) => {
   if (msg.content == "이스터") {
     if (user.gotEaster) {
       const exampleEmbed = new Discord.MessageEmbed()
-        // msg.reply("너 이미 이스터에그로 꿀빨았으면서 너 빨려고 하냐 ㄲ져라")
+
         .setColor("#8f8f8f")
         .setTitle(`ㅗ`)
         .setDescription("조용히 하고 위에 메시지나 삭제해");
@@ -901,10 +899,6 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
           user.name
         }에게 들어간 돗: **+4돗**\n
 현재 잔액: ${user.money} -> ${user.money + 4}`);
-        // msg.reply(`
-        //   ${user.name}: ${str_human}, Dot: ${str_bot}! 결과: 이김
-        //   ${user.name}에게 들어간 돗: **+4돗**
-        //   현재 잔액: ${user.money} -> ${user.money + 4}`);
 
         saveUser = {
           id: id,
