@@ -663,78 +663,78 @@ client.on("message", (msg) => {
     saveChgedUserDB();
   }
 
-  if (msg.content == "도트 운세") {
-    // 운세 기능이다.
-    const int_luck = getRandomInt(100) + 1;
-    const luckMessages = {};
-    let changedMoney = 0;
-    if (!user.id) {
-      const embed = new Discord.MessageEmbed()
-        .setColor(`#8f8f8f`)
-        .setTitle(`등록되지 않은 유저!`)
-        .setDescription(
-          `**도트 돗줘**를 입력해서 등록하고, 서비스를 이용해봐!`
-        );
-      msg.channel.send(embed);
-    } else {
-      if (int_luck == 77) {
-        changedMoney = 20;
-        const embed = new Discord.MessageEmbed()
-          .setColor(`#8f8f8f`)
-          .setTitle(`오늘의 운세!`)
-          .setDescription("행운의 77! 옛다 20돗 먹어라!");
-        msg.channel.send(embed);
-      } else if (int_luck >= 91) {
-        if (int_luck == 100) {
-          changedMoney = 20;
-          const embed = new Discord.MessageEmbed()
-            .setColor(`#8f8f8f`)
-            .setTitle(`오늘의 운세!`)
-            .setDescription("운이 100점이 나오다니! 옛다 20돗 먹어라!");
-          msg.channel.send(embed);
-        } else {
-          changedMoney = int_luck - 90;
-          const embed = new Discord.MessageEmbed()
-            .setColor(`#8f8f8f`)
-            .setTitle(`오늘의 운세!`)
-            .setDescription(
-              `${int_luck}점이 나오다니... 옛다 ${changedMoney}돗 먹어라!`
-            );
-          msg.channel.send(embed);
-        }
-      } else if (int_luck <= 9) {
-        if (int_luck == 1) {
-          changedMoney = -20;
-          const embed = new Discord.MessageEmbed()
-            .setColor(`#8f8f8f`)
-            .setTitle(`오늘의 운세!`)
-            .setDescription(`풉ㅋ 어떻게 0점이 나오냐 ㅋ 20돗 맛있게 먹을게!`);
-          msg.channel.send(embed);
-        } else {
-          changedMoney -= 10 - int_luck;
-          const embed = new Discord.MessageEmbed()
-            .setColor(`#8f8f8f`)
-            .setTitle(`오늘의 운세!`)
-            .setDescription(
-              `풉ㅋ 어떻게 ${int_luck}점이 나오냐 ㅋ ${
-                changedMoney * -1
-              }돗 맛있게 먹을게!`
-            );
-          msg.channel.send(embed);
-        }
-      }
-      saveUser = {
-        // update user info
-        id,
-        name,
-        date,
-        money: user.money + changedMoney,
-        gotEaster: user.gotEaster,
-        stocks: user.stocks,
-      };
-      saveChgedUserDB();
-    }
-  }
+  // if (msg.content == "도트 운세") {
+  //   // 운세 기능이다.
+  //   const int_luck = getRandomInt(100) + 1;
+  //   const luckMessages = {};
+  //   let changedMoney = 0;
+  //   if (!user.id) {
+  //     const embed = new Discord.MessageEmbed()
+  //       .setColor(`#8f8f8f`)
+  //       .setTitle(`등록되지 않은 유저!`)
+  //       .setDescription(
+  //         `**도트 돗줘**를 입력해서 등록하고, 서비스를 이용해봐!`
+  //       );
+  //     msg.channel.send(embed);
+  //   } else {
+  //     if (int_luck == 77) {
+  //       changedMoney = 20;
+  //       const embed = new Discord.MessageEmbed()
+  //         .setColor(`#8f8f8f`)
+  //         .setTitle(`오늘의 운세!`)
+  //         .setDescription("행운의 77! 옛다 20돗 먹어라!");
+  //       msg.channel.send(embed);
+  //     } else if (int_luck >= 91) {
+  //       if (int_luck == 100) {
+  //         changedMoney = 20;
+  //         const embed = new Discord.MessageEmbed()
+  //           .setColor(`#8f8f8f`)
+  //           .setTitle(`오늘의 운세!`)
+  //           .setDescription("운이 100점이 나오다니! 옛다 20돗 먹어라!");
+  //         msg.channel.send(embed);
+  //       } else {
+  //         changedMoney = int_luck - 90;
+  //         const embed = new Discord.MessageEmbed()
+  //           .setColor(`#8f8f8f`)
+  //           .setTitle(`오늘의 운세!`)
+  //           .setDescription(
+  //             `${int_luck}점이 나오다니... 옛다 ${changedMoney}돗 먹어라!`
+  //           );
+  //         msg.channel.send(embed);
+  //       }
+  //     } else if (int_luck <= 9) {
+  //       if (int_luck == 1) {
+  //         changedMoney = -20;
+  //         const embed = new Discord.MessageEmbed()
+  //           .setColor(`#8f8f8f`)
+  //           .setTitle(`오늘의 운세!`)
+  //           .setDescription(`풉ㅋ 어떻게 0점이 나오냐 ㅋ 20돗 맛있게 먹을게!`);
+  //         msg.channel.send(embed);
+  //       } else {
+  //         changedMoney -= 10 - int_luck;
+  //         const embed = new Discord.MessageEmbed()
+  //           .setColor(`#8f8f8f`)
+  //           .setTitle(`오늘의 운세!`)
+  //           .setDescription(
+  //             `풉ㅋ 어떻게 ${int_luck}점이 나오냐 ㅋ ${
+  //               changedMoney * -1
+  //             }돗 맛있게 먹을게!`
+  //           );
+  //         msg.channel.send(embed);
+  //       }
+  //     }
+  //     saveUser = {
+  //       // update user info
+  //       id,
+  //       name,
+  //       date,
+  //       money: user.money + changedMoney,
+  //       gotEaster: user.gotEaster,
+  //       stocks: user.stocks,
+  //     };
+  //     saveChgedUserDB();
+  //   }
+  // }
 
   if (msg.content == "도트 저뭐먹") {
     var meal;
