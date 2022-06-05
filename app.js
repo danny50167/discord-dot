@@ -97,9 +97,6 @@ client.on("message", (msg) => {
 
   const user = JSON.parse(fs.readFileSync(filePath, "utf-8")); // after reading file, save to user
 
-  const today = new Date();
-  const date = "" + today.getFullYear() + today.getMonth() + today.getDate();
-
   const wrongUseAlert = (content) => {
     const exampleEmbed = new Discord.MessageEmbed()
       .setColor(`#8f8f8f`)
@@ -113,6 +110,8 @@ client.on("message", (msg) => {
   const easterReward = 40;
   let saveUser = {};
   if (msg.content == "도트 돗줘") {
+    let date = new Date().toISOString().substring(0,10);
+    console.log(date);
     // give 20d
     if (!user.id) {
       const exampleEmbed = new Discord.MessageEmbed()
@@ -127,7 +126,7 @@ client.on("message", (msg) => {
       saveUser = {
         id: id,
         name: name,
-        date: date,
+        date: user.date,
         money: howMuch * 1.5,
         gotEaster: false,
         stocks: {
@@ -155,7 +154,7 @@ client.on("message", (msg) => {
             // update user info
             id,
             name,
-            date, //의사양반...도트가 어케된겨...
+            date: user.date, //의사양반...도트가 어케된겨...
             money: user.money + howMuch,
             gotEaster: user.gotEaster,
             stocks: user.stocks,
@@ -346,35 +345,45 @@ client.on("message", (msg) => {
         );
       msg.channel.send(exampleEmbed);
     } else if (!num) {
-      wrongUseAlert("잘못된 사용법!", "");
-    } else if (num > user.stocks[1] || !user.stocks[1]) {
-      wrongUseAlert("남은 주식이 없어서 팔지 못해!")
+      wrongUseAlert("**도트 주식판매 <회사이름> <개쉬>** 라고 입력해!");
+    } else if (num > user.stocks[stockName][1] || !user.stocks[stockName][1]) {
+      wrongUseAlert("남은 주식이 없어서 팔지 못해!");
     } else {
-      console.log(num);
       if (num > 0) {
         // tell
         const embed = new Discord.MessageEmbed()
           .setColor(`#8f8f8f`)
           .setTitle("주식 판매")
           .setDescription(
-            `${stockName}의 주식을 한 주식 당 ${user.stocks[0]}돗으로 판매했어!`
+            `${stockName}의 주식을 한 주식 당 ${user.stocks[stockName][0]}돗으로 판매했어!`
           )
           .addFields({
             name: "주식계좌:",
-            value: `평단: ${user.stocks[0]}, ${user.stocks[1] - num}`,
+            value: `평단: ${user.stocks[stockName][0]}`,
             name: "잔액:",
-            value: `${user.money} -> ${user.money + user.stocks[0] * num}`,
+            value: `${user.money} -> ${user.money + user.stocks[stockName][0] * num}`,
           });
         msg.channel.send(embed);
+
+        let stockCurr = {
+          애플: user.stocks["애플"],
+          구글: user.stocks["구글"],
+          테슬라: user.stocks["테슬라"],
+          로블록스: user.stocks["로블록스"],
+          메타: user.stocks["메타"],
+        };
+
+
+        stockCurr[stockName][1] = stockCurr[stockName][1] - num;
 
         // update db
         saveUser = {
           id,
           name,
-          date,
-          money: user.money + user.stocks[0] * num,
+          date: user.date,
+          money: user.money + user.stocks[stockName][0] * num,
           gotEaster: user.gotEaster,
-          stocks: [user.stocks[0], user.stocks[1] - num],
+          stocks: stockCurr,
         };
         saveChgedUserDB();
       }
@@ -421,7 +430,7 @@ client.on("message", (msg) => {
       saveUser = {
         id: id,
         name: name,
-        date: date,
+        date: user.date,
         money: user.money + changedMoney,
         gotEaster: user.gotEaster,
         stocks: user.stocks,
@@ -655,7 +664,7 @@ client.on("message", (msg) => {
     saveUser = {
       id: id,
       name: name,
-      date: date,
+      date: user.date,
       money: user.money + changedMoney,
       gotEaster: user.gotEaster,
       stocks: user.stocks,
@@ -811,7 +820,7 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
       saveUser = {
         id: id,
         name: name,
-        date: date,
+        date: user.date,
         money: user.money + easterReward,
         gotEaster: true,
         stocks: user.stocks,
@@ -860,7 +869,7 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
         saveUser = {
           id: id,
           name: name,
-          date: date,
+          date: user.date,
           money: user.money,
           gotEaster: user.gotEaster,
           stocks: user.stocks,
@@ -884,7 +893,7 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
         saveUser = {
           id: id,
           name: name,
-          date: date,
+          date: user.date,
           money: user.money - 4,
           gotEaster: user.Easter,
           stocks: user.stocks,
@@ -903,7 +912,7 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
         saveUser = {
           id: id,
           name: name,
-          date: date,
+          date: user.date,
           money: user.money + 4,
           gotEaster: user.gotEaster,
           stocks: user.stocks,
@@ -916,5 +925,5 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
 });
 
 client.login(
-  "OTcyNTUzNDcxOTM5MTgyNjMy.G73F9L.58QVxSYRUPZ2FGfKKjbhMyncNcyl-9eKfVIwvI"
+  "OTcyNTUzNDcxOTM5MTgyNjMy.G1CSY9.yjTyCV20tz6Vq_wEExv371xvOfCdwKJ-gLKJGM"
 );
