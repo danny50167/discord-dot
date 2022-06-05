@@ -480,35 +480,17 @@ client.on("message", (msg) => {
       .setTitle("커맨드")
       .setColor(`#8f8f8f`)
       .addFields(
-        {
-          name: `**도트 ㅎㅇ**`,
-          value: `동방예의지국인 대한민국에서 인사는 기본이겠지?`,
-        },
-        {
-          name: `**도트 돗줘**`,
-          value: `하루에 한번 20돗씩 받아봐! 처음 오셨다면 30돗이야!`,
-        },
-        { name: `**도트 잔액확인 | 잔액**`, value: "잔액을 확인해봐!" },
-        { name: `**도트 가위바위보**`, value: `간단한 가위바위보를 즐겨봐!` },
-        { name: `**도트 운세**`, value: `오늘의 운세를 확인해봐!` },
-        {
-          name: `**도트 과일게임**`,
-          value: `과일이 들어간 세칸이 모두 같으면 40돗!`,
-        },
-        { name: `**도트 리더보드**`, value: `서버의 리더보드를 확인해봐!` },
-        { name: `**도트 동전**`, value: `앞면이 나올까? 뒷면이 나올까?` },
-        {
-          name: `**도트 투표**`,
-          value: `민주주의 국가 대한민국에서 가장 필요한 투표!`,
-        },
-        {
-          name: `**도트 저뭐먹**`,
-          value: `저녁을 뭐 먹을지 고민될때 사용해봐!`,
-        },
-        {
-          name: `**도트 제비뽑기 <항목1> <항목2>...**`,
-          value: `결정이 힘들어질때 사용해봐!`,
-        },
+        {name: `**도트 ㅎㅇ**`, value: `동방예의지국인 대한민국에서 인사는 기본이겠지?`},
+        {name: `**도트 돗줘**`, value: `하루에 한번 20돗씩 받아봐! 처음 오셨다면 30돗이야!`},
+        {name: `**도트 잔액확인ㅣ잔액**`, value: "잔액을 확인해봐!" },
+        {name: `**도트 가위ㅣ바위ㅣ보**`, value: `간단한 가위바위보를 즐겨봐!` },
+        {name: `**도트 운세**`, value: `오늘의 운세를 확인해봐!` },
+        {name: `**도트 과일게임**`, value: `과일이 들어간 세칸이 모두 같으면 40돗!`},
+        {name: `**도트 리더보드**`, value: `서버의 리더보드를 확인해봐!` },
+        {name: `**도트 동전**`, value: `앞면이 나올까? 뒷면이 나올까?` },
+        {name: `**도트 투표**`, value: `민주주의 국가 대한민국에서 가장 필요한 투표!`},
+        {name: `**도트 저뭐먹**`, value: `저녁을 뭐 먹을지 고민될때 사용해봐!`},
+        {name: `**도트 제비뽑기 <항목1> <항목2>...**`, value: `결정이 힘들어질때 사용해봐!`},
         { name: `**도트 주식사용법**`, value: `주식 사용법을 자세하게 알아봐!` }
       );
     msg.channel.send(embed);
@@ -925,5 +907,5 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
 });
 
 client.login(
-  "OTcyNTUzNDcxOTM5MTgyNjMy.G1CSY9.yjTyCV20tz6Vq_wEExv371xvOfCdwKJ-gLKJGM"
+  "OTcyNTUzNDcxOTM5MTgyNjMy.GYtH1R.DvzmnluzUiOA9TQ8XZvXsVi0u791khtJBwWYP8"
 );
