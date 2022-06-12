@@ -833,7 +833,7 @@ client.on("message", (msg) => {
     } else {
       const exampleEmbed = new Discord.MessageEmbed()
         .setColor(`#8f8f8f`)
-        .setTitle(`이 메세지를 빨리 지워줘!`)
+        .setTitle(`위의 메세지를 빨리 지워줘!`)
         .setDescription(`도트에 대해 얼마나 알아낸거야... \n선물로 ${easterReward}돗을 줄게!\n
 
 ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
@@ -945,5 +945,5 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
 });
 
 client.login(
-  "OTcyNTUzNDcxOTM5MTgyNjMy.GQBZ5H.gH-bStBWkYlpCSqaFdLMYMg7KZ3E5-2n2wr61c"
+  "OTcyNTUzNDcxOTM5MTgyNjMy.GEIlhE.9fBrpPiUh7IsAa200eigOFMku_h8j93PLtbZ9g"
 );
