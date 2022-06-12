@@ -110,7 +110,7 @@ client.on("message", (msg) => {
   const easterReward = 40;
   let saveUser = {};
   if (msg.content == "도트 돗줘") {
-    let date = new Date().toISOString().substring(0,10);
+    let date = new Date().toISOString().substring(0, 10);
     console.log(date);
     // give 20d
     if (!user.id) {
@@ -147,7 +147,9 @@ client.on("message", (msg) => {
             .setColor(`#8f8f8f`)
             .setTitle(`적립완료!`)
             .setDescription(
-              `${howMuch}돗 적립완료! \n${name}님의 현재 잔액은 ${user.money + howMuch}이야!`
+              `${howMuch}돗 적립완료! \n${name}님의 현재 잔액은 ${
+                user.money + howMuch
+              }이야!`
             );
           msg.channel.send(exampleEmbed);
           saveUser = {
@@ -325,7 +327,9 @@ client.on("message", (msg) => {
             const embed = new Discord.MessageEmbed()
               .setColor(`#8f8f8f`)
               .setTitle(`잔액 부족`)
-              .setDescription(`${stockName}의 주가는 ${price}돗 이지만 너의 잔액은 ${user.money}돗이야. 돈을 더 모아서 와!`)
+              .setDescription(
+                `${stockName}의 주가는 ${price}돗 이지만 너의 잔액은 ${user.money}돗이야. 돈을 더 모아서 와!`
+              );
             msg.channel.send(embed);
           }
         }
@@ -361,7 +365,9 @@ client.on("message", (msg) => {
             name: "주식계좌:",
             value: `평단: ${user.stocks[stockName][0]}`,
             name: "잔액:",
-            value: `${user.money} -> ${user.money + user.stocks[stockName][0] * num}`,
+            value: `${user.money} -> ${
+              user.money + user.stocks[stockName][0] * num
+            }`,
           });
         msg.channel.send(embed);
 
@@ -372,7 +378,6 @@ client.on("message", (msg) => {
           로블록스: user.stocks["로블록스"],
           메타: user.stocks["메타"],
         };
-
 
         stockCurr[stockName][1] = stockCurr[stockName][1] - num;
 
@@ -448,19 +453,26 @@ client.on("message", (msg) => {
         } else {
           stockMsg += `**${i}**: 평단: ${user.stocks[i][0]}, ${user.stocks[i][1]}주\n`;
         }
-        console.log(user.stocks[i]);
+        // console.log(user.stocks[i]);
       }
-      const embed = new Discord.MessageEmbed()
-        .setColor(`#8f8f8f`)
-        .setTitle(`${user.name}의 현재 잔액:`)
-        .addFields(
-          { name: "돗:", value: `${user.money}돗` },
+      console.log(stockMsg);
+
+      if (stockMsg) {
+        var field =
+          ({ name: "돗:", value: `${user.money}돗` },
           {
             name: "주식: ",
             value: stockMsg,
             inline: true,
-          }
-        )
+          });
+      } else {
+        var field = { name: "돗: ", value: `${user.money}돗` };
+      }
+
+      const embed = new Discord.MessageEmbed()
+        .setColor(`#8f8f8f`)
+        .setTitle(`${user.name}의 현재 잔액:`)
+        .addFields(field)
         .setTimestamp();
       msg.channel.send(embed);
     } else if (!user.id) {
@@ -480,20 +492,44 @@ client.on("message", (msg) => {
       .setTitle("커맨드")
       .setColor(`#8f8f8f`)
       .addFields(
-        {name: `**도트 ㅎㅇ**`, value: `동방예의지국인 대한민국에서 인사는 기본이겠지?`},
-        {name: `**도트 돗줘**`, value: `하루에 한번 20돗씩 받아봐! 처음 오셨다면 30돗이야!`},
-        {name: `**도트 잔액확인ㅣ잔액**`, value: "잔액을 확인해봐!" },
-        {name: `**도트 관리자**`, value: `관리자들이 누군지 확인해봐!`},
-        {name: `**도트 가위ㅣ바위ㅣ보**`, value: `간단한 가위바위보를 즐겨봐!` },
+        {
+          name: `**도트 ㅎㅇ**`,
+          value: `동방예의지국인 대한민국에서 인사는 기본이겠지?`,
+        },
+        {
+          name: `**도트 돗줘**`,
+          value: `하루에 한번 20돗씩 받아봐! 처음 오셨다면 30돗이야!`,
+        },
+        { name: `**도트 잔액확인ㅣ잔액**`, value: "잔액을 확인해봐!" },
+        { name: `**도트 관리자**`, value: `관리자들이 누군지 확인해봐!` },
+        {
+          name: `**도트 가위ㅣ바위ㅣ보**`,
+          value: `간단한 가위바위보를 즐겨봐!`,
+        },
         // {name: `**도트 운세**`, value: `오늘의 운세를 확인해봐!` },
-        {name: `**도트 과일게임**`, value: `과일이 들어간 세칸이 모두 같으면 40돗!`},
-        {name: `**도트 동전**`, value: `앞면이 나올까? 뒷면이 나올까?` },
-        {name: `**도트 투표**`, value: `민주주의 국가 대한민국에서 가장 필요한 투표!`},
-        {name: `**도트 리더보드**`, value: `서버의 리더보드를 확인해봐!` },
-        {name: `**도트 저뭐먹**`, value: `저녁을 뭐 먹을지 고민될때 사용해봐!`},
-        {name: `**도트 제비뽑기 <항목1> <항목2>...**`, value: `결정이 힘들어질때 사용해봐!`},
-        {name: `**도트 주사위**`, value: `주사위가 필요할 때 너 옆에 꼭 주사위가 있어야할까?`},
-        {name: `**도트 주식사용법**`, value: `주식 사용법을 자세하게 알아봐!` }
+        {
+          name: `**도트 과일게임**`,
+          value: `과일이 들어간 세칸이 모두 같으면 40돗!`,
+        },
+        { name: `**도트 동전**`, value: `앞면이 나올까? 뒷면이 나올까?` },
+        {
+          name: `**도트 투표**`,
+          value: `민주주의 국가 대한민국에서 가장 필요한 투표!`,
+        },
+        { name: `**도트 리더보드**`, value: `서버의 리더보드를 확인해봐!` },
+        {
+          name: `**도트 저뭐먹**`,
+          value: `저녁을 뭐 먹을지 고민될때 사용해봐!`,
+        },
+        {
+          name: `**도트 제비뽑기 <항목1> <항목2>...**`,
+          value: `결정이 힘들어질때 사용해봐!`,
+        },
+        {
+          name: `**도트 주사위**`,
+          value: `주사위가 필요할 때 너 옆에 꼭 주사위가 있어야할까?`,
+        },
+        { name: `**도트 주식사용법**`, value: `주식 사용법을 자세하게 알아봐!` }
       );
     msg.channel.send(embed);
   }
@@ -596,7 +632,7 @@ client.on("message", (msg) => {
         `결과는.. **${elements[getRandomInt(elements.length)]}**!`
       );
 
-    msg.channel.send(embed)
+    msg.channel.send(embed);
   }
 
   if (msg.content == "도트 주사위") {
@@ -909,5 +945,5 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
 });
 
 client.login(
-  "OTcyNTUzNDcxOTM5MTgyNjMy.GBbU40.E6WQdKViACAnH7YIncnbUDyk-LQeOzHjp7lMXo"
+  "OTcyNTUzNDcxOTM5MTgyNjMy.GQBZ5H.gH-bStBWkYlpCSqaFdLMYMg7KZ3E5-2n2wr61c"
 );
