@@ -952,5 +952,5 @@ ${user.name}의 잔액:\n${user.money} -> ${user.money + easterReward}`);
 });
 
 client.login(
-  "OTcyNTUzNDcxOTM5MTgyNjMy.GEIlhE.9fBrpPiUh7IsAa200eigOFMku_h8j93PLtbZ9g"
+  "OTcyNTUzNDcxOTM5MTgyNjMy.G-P0C-.4neo110nPgtNnLy6sIN5gx_kbZ12qyYaFYgnjI"
 );
